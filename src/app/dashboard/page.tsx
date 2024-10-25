@@ -1,8 +1,15 @@
-import { redirect } from 'next/navigation'
-import React from 'react'
+"use client";
+import { useGetForums } from "@/features/forums/api/use-get-forums";
+import { redirect } from "next/navigation";
 
 const DashboardPage = () => {
-  redirect("/dashboard/overview")
-}
+  const { data: forums } = useGetForums();
 
-export default DashboardPage
+  const firstForumId = forums?.documents[0].$id;
+
+  if (firstForumId) {
+    return redirect(`/dashboard/${firstForumId}/overview`);
+  }
+};
+
+export default DashboardPage;

@@ -1,6 +1,6 @@
 import { getUser } from "@/app/auth/onboarding/_actions/actions";
 import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
@@ -21,11 +21,10 @@ export default async function DashboardLayout({
     redirect("/auth/onboarding");
   }
 
-
   return (
     <main className="min-h-screen">
       <SidebarProvider>
-        <AppSidebar />
+        <AppSidebar variant="inset" />
         {children}
       </SidebarProvider>
     </main>
