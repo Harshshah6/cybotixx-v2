@@ -1,5 +1,5 @@
 import "server-only";
-import { Account, Client } from "node-appwrite";
+import { Client } from "node-appwrite";
 
 export const DATABASE_ID = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
 export const FORUMS_ID = process.env.NEXT_PUBLIC_APPWRITE_FORUMS_ID!

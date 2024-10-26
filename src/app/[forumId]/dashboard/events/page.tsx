@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/sidebar";
 import { useGetEvent } from "@/features/events/api/use-get-event";
 import { useForumId } from "@/features/forums/hooks/use-forum-id";
+import Image from "next/image";
 
 export default function Page() {
 
@@ -46,11 +47,21 @@ export default function Page() {
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="aspect-video rounded-xl bg-muted/50" />
+
+
+            <div className=" aspect-square rounded-xl bg-muted/50 hover:-translate-y-1 transition-all hover:shadow-event hover:shadow-blue-500 hover:-translate-x-1 overflow-hidden">
+              <div className="border border-yellow-500 aspect-video overflow-hidden">
+                <Image src={`https://cloud.appwrite.io/v1/storage/buckets/671b7d480000a3616092/files/671b7d5c00042840d0da/view?project=67192758000375cf388b&project=67192758000375cf388b&mode=admin`} alt="image" width={500} height={200} className="h-full w-full object-cover bg-center hover:scale-125 transition-all duration-1000" />
+              </div>  
+              <div className="border-2 border-red-500 flex-grow">
+
+              </div>
+            </div>
+
+            
             <div className="aspect-video rounded-xl bg-muted/50" />
             <div className="aspect-video rounded-xl bg-muted/50" />
           </div>
-          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
         </div>
       </SidebarInset>
   );

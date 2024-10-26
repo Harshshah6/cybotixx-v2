@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        'event': '8px 10px 10px 0px rgb(59 130 246)',
+      },
       keyframes: {
         "fill-right": {
           "0%": { width: "0%" },
