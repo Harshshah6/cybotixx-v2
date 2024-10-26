@@ -8,13 +8,22 @@ import {
 } from "@/components/ui/sidebar";
 import Image from "next/image";
 import { Skeleton } from "./ui/skeleton";
+import { useGetForum } from "@/features/forums/api/use-get-forum";
+import { useForumId } from "@/features/forums/hooks/use-forum-id";
 
 export function TeamSwitcher() {
+
+  const forumId = useForumId()
+
+  const {data: forum, isLoading: forumLoading} = useGetForum({forumId})
+
+  console.log(forum)
+
 
   return (
     <SidebarMenu>
       <SidebarMenuItem className="">
-        {/* {forumLoading ? (
+        {forumLoading ? (
           <Skeleton className="data-[state=open]:bg-sidebar-accent h-12 bg-white/35 data-[state=open]:text-sidebar-accent-foreground border" />
         ) : (
           <SidebarMenuButton
@@ -30,11 +39,11 @@ export function TeamSwitcher() {
               />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-semibold">{forum?.name}</span>
+              <span className="truncate font-semibold">{forum?.forumName}</span>
               <span className="truncate text-xs">Forum</span>
             </div>
           </SidebarMenuButton>
-        )} */}
+        )}
       </SidebarMenuItem>
     </SidebarMenu>
   );

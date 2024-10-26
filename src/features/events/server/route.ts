@@ -7,11 +7,11 @@ const app = new Hono().get("/:forumId", async (c) => {
 
   const databases = new Databases(memberClient);
 
-  const event = await databases.listDocuments(DATABASE_ID, EVENTS_ID, [
+  const events = await databases.listDocuments(DATABASE_ID, EVENTS_ID, [
     Query.equal("forumId", forumId),
   ]);
 
-  if (!event) {
+  if (events.total === 0) {
     return c.json({
       data: {
         documents: [],
@@ -21,7 +21,7 @@ const app = new Hono().get("/:forumId", async (c) => {
   }
 
   return c.json({
-    data: event,
+    data: events,
   });
 });
 

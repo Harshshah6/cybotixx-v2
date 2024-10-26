@@ -8,7 +8,7 @@ const app = new Hono()
 
     const forums = await databases.listDocuments(DATABASE_ID, FORUMS_ID);
 
-    if (!forums) {
+    if (forums.total === 0) {
       return c.json({
         data: {
           documents: [],
