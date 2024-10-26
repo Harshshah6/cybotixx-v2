@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { onboardUserSchema } from "@/app/auth/onboarding/_actions/schemas";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,7 +20,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { createUser } from "@/app/auth/onboarding/_actions/actions";
 import { useRouter } from "next/navigation";
 import { LoaderIcon } from "lucide-react";
 
@@ -29,7 +27,15 @@ interface OnboardingFormProps {
   userId: string;
   image: string;
   name: string | null;
+
 }
+
+const onboardUserSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  image: z.string().url("Image must be a valid URL"), // Assuming image is a URL
+  studentId: z.string().min(1, "Student ID is required"),
+  course: z.enum(["BCA", "BBA", "BCOM"]),
+});
 
 const OnboardingForm = ({ image, name }: OnboardingFormProps) => {
   const form = useForm<z.infer<typeof onboardUserSchema>>({
@@ -49,13 +55,7 @@ const OnboardingForm = ({ image, name }: OnboardingFormProps) => {
   const onSubmit = async (values: z.infer<typeof onboardUserSchema>) => {
     try {
       setIsLoading(true);
-      const user = await createUser({
-        name: values.name,
-        imageUrl: values.image,
-        studentId: values.studentId,
-        course: values.course,
-      });
-      router.push(`/${user}/dashboard`);
+      console.log(values)
     } catch (error) {
       console.log(error);
     }

@@ -8,11 +8,9 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
-import { getImages } from "@/features/images/actions/get-images";
 import Image from "next/image";
 
 export default async function GalleryPage() {
-  const images = await getImages();
 
   return (
     <SidebarInset>

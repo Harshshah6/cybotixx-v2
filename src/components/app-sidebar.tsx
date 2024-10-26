@@ -24,12 +24,10 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { NavMain } from "./nav-main";
-import { useForumId } from "@/features/forums/hooks/use-forum-id";
 
 // This is sample data.
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const forumId = useForumId();
   const data = {
     user: {
       name: "shadcn",
@@ -56,23 +54,23 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     navMain: [
       {
         title: "Overview",
-        url: `/dashboard/${forumId}/overview`,
+        url: `/dashboard/overview`,
         icon: BookOpen,
       },
       {
         title: "Gallery",
-        url: `/dashboard/${forumId}/gallery`,
+        url: `/dashboard/gallery`,
         icon: Images,
       },
 
       {
         title: "Events",
-        url: `/dashboard/${forumId}/events`,
+        url: `/dashboard/events`,
         icon: Calendar,
       },
       {
         title: "Members",
-        url: `/dashboard/${forumId}/members`,
+        url: `/dashboard/members`,
         icon: Users,
       },
     ],

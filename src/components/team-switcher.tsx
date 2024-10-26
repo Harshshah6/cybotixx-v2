@@ -6,24 +6,15 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { useForumId } from "@/features/forums/hooks/use-forum-id";
-import { useGetForum } from "@/features/forums/api/use-get-forum";
 import Image from "next/image";
 import { Skeleton } from "./ui/skeleton";
 
 export function TeamSwitcher() {
-  const forumId = useForumId();
-
-  const { data: forum, isLoading: forumLoading } = useGetForum({
-    param: {
-      forumId,
-    },
-  });
 
   return (
     <SidebarMenu>
       <SidebarMenuItem className="">
-        {forumLoading ? (
+        {/* {forumLoading ? (
           <Skeleton className="data-[state=open]:bg-sidebar-accent h-12 bg-white/35 data-[state=open]:text-sidebar-accent-foreground border" />
         ) : (
           <SidebarMenuButton
@@ -43,7 +34,7 @@ export function TeamSwitcher() {
               <span className="truncate text-xs">Forum</span>
             </div>
           </SidebarMenuButton>
-        )}
+        )} */}
       </SidebarMenuItem>
     </SidebarMenu>
   );
