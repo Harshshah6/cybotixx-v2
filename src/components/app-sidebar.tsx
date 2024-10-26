@@ -24,10 +24,18 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { NavMain } from "./nav-main";
+import { useGetForum } from "@/features/forums/api/use-get-forum";
+import { useForumId } from "@/features/forums/hooks/use-forum-id";
 
 // This is sample data.
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const forumId = useForumId();
+
+  const { data: forum } = useGetForum({ forumId });
+
+  console.log(forum)
+
   const data = {
     user: {
       name: "shadcn",
@@ -54,23 +62,23 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     navMain: [
       {
         title: "Overview",
-        url: `/dashboard/overview`,
+        url: `/${forumId}/dashboard`,
         icon: BookOpen,
       },
       {
         title: "Gallery",
-        url: `/dashboard/gallery`,
+        url: `/${forumId}/dashboard/gallery`,
         icon: Images,
       },
 
       {
         title: "Events",
-        url: `/dashboard/events`,
+        url: `/${forumId}/dashboard/events`,
         icon: Calendar,
       },
       {
         title: "Members",
-        url: `/dashboard/members`,
+        url: `/${forumId}/dashboard/members`,
         icon: Users,
       },
     ],

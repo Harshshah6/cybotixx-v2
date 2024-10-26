@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/app-sidebar";
+"use client"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,11 +10,19 @@ import {
 import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
-  SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { useGetEvent } from "@/features/events/api/use-get-event";
+import { useForumId } from "@/features/forums/hooks/use-forum-id";
 
-export default async function OverviewPage() {
+export default function Page() {
+
+  const forumId = useForumId()
+
+  const {data: events} = useGetEvent({forumId})
+
+  console.log(events)
+
   return (
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
@@ -30,7 +38,7 @@ export default async function OverviewPage() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Overview</BreadcrumbPage>
+                  <BreadcrumbPage>Events</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
