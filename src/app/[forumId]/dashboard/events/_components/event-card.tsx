@@ -33,7 +33,7 @@ const EventCard = ({eventName, imageUrl, date, eventId}: EventCardProps) => {
       <div className="p-3 flex-grow">
         <div className="flex justify-between">
           <p className="text-xl font-medium">{eventName}</p>
-          <p className="text-sm border px-1 flex justify-center items-center bg-white/20 rounded-md">
+          <p className="text-sm truncate border px-1 flex justify-center items-center bg-white/20 rounded-md">
             {date}
           </p>
 
