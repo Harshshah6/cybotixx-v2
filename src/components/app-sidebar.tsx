@@ -26,15 +26,18 @@ import {
 import { NavMain } from "./nav-main";
 import { useGetForum } from "@/features/forums/api/use-get-forum";
 import { useForumId } from "@/features/forums/hooks/use-forum-id";
+import { useEventId } from "@/features/events/hooks/use-event-id";
 
 // This is sample data.
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const forumId = useForumId();
 
+  const eventId = useEventId();
+
   const { data: forum } = useGetForum({ forumId });
 
-  console.log(forum)
+  console.log(forum);
 
   const data = {
     user: {
@@ -73,7 +76,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
       {
         title: "Events",
-        url: `/${forumId}/dashboard/events`,
+        url: eventId
+          ? `/${forumId}/dashboard/events/${eventId}`
+          : `/${forumId}/dashboard/events`,
         icon: Calendar,
       },
       {

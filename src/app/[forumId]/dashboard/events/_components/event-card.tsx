@@ -1,6 +1,8 @@
 "use client";
+import { useForumId } from "@/features/forums/hooks/use-forum-id";
 import { useGetParticipants } from "@/features/participants/api/use-get-participants";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface EventCardProps {
@@ -11,12 +13,19 @@ interface EventCardProps {
 }
 
 const EventCard = ({ eventName, imageUrl, date, eventId }: EventCardProps) => {
+  const forumId = useForumId();
+
   const { data: participants } = useGetParticipants({ eventId });
 
   console.log(participants);
 
+  const router = useRouter();
+
   return (
-    <div className=" aspect-square relative group cursor-pointer rounded-xl bg-muted/50 hover:-translate-y-1 transition-all hover:shadow-event hover:shadow-blue-500 hover:-translate-x-1 overflow-hidden">
+    <div
+      onClick={() => router.push(`/${forumId}/dashboard/events/${eventId}`)}
+      className=" aspect-square relative group cursor-pointer rounded-xl bg-muted/50 hover:-translate-y-1 transition-all hover:shadow-event hover:shadow-blue-500 hover:-translate-x-1 overflow-hidden"
+    >
       <span>
         <div className="h-3 bg-blue-600 w-3 z-20 animate-pulse rounded-full absolute right-2 top-2" />
       </span>

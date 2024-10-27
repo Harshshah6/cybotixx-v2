@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
-import { useGetEvent } from "@/features/events/api/use-get-event";
+import { useGetEvents } from "@/features/events/api/use-get-events";
 import { useForumId } from "@/features/forums/hooks/use-forum-id";
 import EventCard from "./_components/event-card";
 import { format } from "date-fns";
@@ -17,7 +17,7 @@ import { format } from "date-fns";
 export default function Page() {
   const forumId = useForumId();
 
-  const { data: events, isLoading: eventsLoading } = useGetEvent({ forumId });
+  const { data: events, isLoading: eventsLoading } = useGetEvents({ forumId });
 
   if (eventsLoading) {
     return <p>Loading</p>;

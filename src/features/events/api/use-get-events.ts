@@ -1,18 +1,18 @@
 import { client } from "@/lib/rpc";
 import { useQuery } from "@tanstack/react-query";
 
-export const useGetEvent = ({ eventId }: { eventId: string }) => {
+export const useGetEvents = ({ forumId }: { forumId: string }) => {
   const query = useQuery({
-    queryKey: ["event", eventId],
+    queryKey: ["event", forumId],
     queryFn: async () => {
-      const response = await client.api.events[":eventId"].$get({
+      const response = await client.api.events[":forumId"].$get({
         param: {
-          eventId,
+          forumId,
         },
       });
 
       if (!response.ok) {
-        throw new Error("Failed to fetch event.");
+        throw new Error("Failed to fetch event");
       }
 
       const { data } = await response.json();
