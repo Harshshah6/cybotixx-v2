@@ -4,6 +4,7 @@ import { Client } from "node-appwrite";
 export const DATABASE_ID = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
 export const FORUMS_ID = process.env.NEXT_PUBLIC_APPWRITE_FORUMS_ID!;
 export const EVENTS_ID = process.env.NEXT_PUBLIC_APPWRITE_EVENTS_ID!;
+export const MEMBERS_ID = process.env.NEXT_PUBLIC_APPWRITE_MEMBERS_ID!;
 export const PROJECT_ID = process.env.NEXT_PUBLIC_APPWRITE_PROJECT!;
 export const ENDPOINT_ID = process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!;
 export const PARTICIPANTS_ID =

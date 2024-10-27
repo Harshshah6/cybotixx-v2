@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
-import Image from "next/image";
 
 export default async function GalleryPage() {
 
@@ -38,14 +37,6 @@ export default async function GalleryPage() {
       </div>
       <div className="flex flex-1 flex-col gap-4 p-4 pt-2">
         <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          {/* {images?.documents[0]?.imagesUrl?.map((image: string) => (
-            <div
-              className="aspect-video rounded-xl relative bg-muted/50"
-              key={image}
-            >
-              <Image src={image} alt="galler-image" fill />
-            </div>
-          ))} */}
           <div className="aspect-video rounded-xl bg-muted/50" />
           <div className="aspect-video rounded-xl bg-muted/50" />
           <div className="aspect-video rounded-xl bg-muted/50" />

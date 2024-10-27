@@ -1,3 +1,4 @@
+"use client";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,8 +9,26 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { DataTable } from "./_components/data-table";
+import { columns } from "./_components/columns";
+import { useForumId } from "@/features/forums/hooks/use-forum-id";
+import { useGetMembers } from "@/features/members/api/use-get-members";
 
-export default async function MembersPage() {
+export default function MembersPage() {
+  const forumId = useForumId();
+
+  const { data: members, isLoading: membersLoading } = useGetMembers({
+    forumId,
+  });
+
+  if (membersLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!members) {
+    return <p>Error</p>;
+  }
+
   return (
     <SidebarInset>
       <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
@@ -23,19 +42,21 @@ export default async function MembersPage() {
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
-                <BreadcrumbPage>Members</BreadcrumbPage>
+                <BreadcrumbPage>Gallery</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>
       </header>
-      <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
+      <div className="w-full">
+        <p className="lg:text-3xl md:text-2xl sm:text-xl text-md font-semibold p-4">
+          A Gallery of Moments and Milestones
+        </p>
+      </div>
+      <div className="flex flex-1 flex-col gap-4 p-4 pt-2">
+        <div className="min-h-[100vh] overflow-hidden flex-1 flex justify-center items-center rounded-xl bg-muted/50 md:min-h-min">
+          <DataTable columns={columns} data={members?.documents} />
         </div>
-        <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
       </div>
     </SidebarInset>
   );

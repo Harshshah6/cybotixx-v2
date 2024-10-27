@@ -10,7 +10,7 @@ interface EventCardProps {
   eventId: string
 }
 
-const EventCard = ({eventName, imageUrl, date, eventId}: EventCardProps) => {
+const  EventCard = ({eventName, imageUrl, date, eventId}: EventCardProps) => {
 
     const {data: participants} = useGetParticipants({eventId})
 
@@ -21,7 +21,7 @@ const EventCard = ({eventName, imageUrl, date, eventId}: EventCardProps) => {
       <span>
         <div className="h-3 bg-blue-600 w-3 z-20 animate-pulse rounded-full absolute right-2 top-2" />
       </span>
-      <div className="border border-yellow-500 aspect-video overflow-hidden">
+      <div className="border aspect-video overflow-hidden">
         <Image
           src={imageUrl}
           alt="image"
@@ -31,14 +31,14 @@ const EventCard = ({eventName, imageUrl, date, eventId}: EventCardProps) => {
         />
       </div>
       <div className="p-3 flex-grow">
-        <div className="flex justify-between">
-          <p className="text-xl font-medium">{eventName}</p>
-          <p className="text-sm truncate border px-1 flex justify-center items-center bg-white/20 rounded-md">
+        <div className="flex justify-between items-center">
+          <p className="text-2xl font-semibold tracking-wider">{eventName}</p>
+          <p className="text-sm truncate border px-1 h-6 flex justify-center items-center bg-white/20 rounded-md">
             {date}
           </p>
 
         </div>
-        <p>Participants : {participants?.total}</p>
+        {/* <p>Participants : {participants?.total}</p> */}
       </div>
     </div>
   );
