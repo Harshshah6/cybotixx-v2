@@ -16,7 +16,13 @@ export function TeamSwitcher() {
 
   const { data: forum, isLoading: forumLoading } = useGetForum({ forumId });
 
-  console.log(forum);
+  if (forumLoading) {
+    return <p>Loading</p>;
+  }
+
+  if (!forum) {
+    return <p>Error</p>;
+  }
 
   return (
     <SidebarMenu>
@@ -30,7 +36,7 @@ export function TeamSwitcher() {
           >
             <div className="flex aspect-square size-8 relative items-center justify-center rounded-lg text-sidebar-primary-foreground">
               <Image
-                src={forum.imageUrl}
+                src={forum?.imageUrl}
                 alt="image"
                 fill
                 className="rounded-lg"

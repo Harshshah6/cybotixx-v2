@@ -25,7 +25,7 @@ const app = new Hono()
       data: events,
     });
   })
-  .get("/:eventId", async (c) => {
+  .get("/:eventId/details", async (c) => {
     const { eventId } = c.req.param();
     const databases = new Databases(memberClient);
 
