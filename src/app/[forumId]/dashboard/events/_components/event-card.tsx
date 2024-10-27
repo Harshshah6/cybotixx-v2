@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useGetParticipants } from "@/features/participants/api/use-get-participants";
 import Image from "next/image";
 import React from "react";
@@ -7,14 +7,13 @@ interface EventCardProps {
   eventName: string;
   imageUrl: string;
   date: string;
-  eventId: string
+  eventId: string;
 }
 
-const  EventCard = ({eventName, imageUrl, date, eventId}: EventCardProps) => {
+const EventCard = ({ eventName, imageUrl, date, eventId }: EventCardProps) => {
+  const { data: participants } = useGetParticipants({ eventId });
 
-    const {data: participants} = useGetParticipants({eventId})
-
-    console.log(participants)
+  console.log(participants);
 
   return (
     <div className=" aspect-square relative group cursor-pointer rounded-xl bg-muted/50 hover:-translate-y-1 transition-all hover:shadow-event hover:shadow-blue-500 hover:-translate-x-1 overflow-hidden">
@@ -32,13 +31,11 @@ const  EventCard = ({eventName, imageUrl, date, eventId}: EventCardProps) => {
       </div>
       <div className="p-3 flex-grow">
         <div className="flex justify-between items-center">
-          <p className="text-2xl font-semibold tracking-wider">{eventName}</p>
+          <p className="text-2xl font-semibold tracking-tight">{eventName}</p>
           <p className="text-sm truncate border px-1 h-6 flex justify-center items-center bg-white/20 rounded-md">
             {date}
           </p>
-
         </div>
-        {/* <p>Participants : {participants?.total}</p> */}
       </div>
     </div>
   );

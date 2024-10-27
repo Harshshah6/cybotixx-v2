@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { QueryProvider } from "@/components/query-provider";
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,7 +39,10 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <ThemeProvider attribute="class" defaultTheme="dark">
-            <QueryProvider>{children}</QueryProvider>
+            <QueryProvider><NuqsAdapter>
+              {children}
+              </NuqsAdapter>
+              </QueryProvider>
           </ThemeProvider>
         </body>
       </html>
