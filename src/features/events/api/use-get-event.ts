@@ -3,9 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 
 export const useGetEvent = ({ eventId }: { eventId: string }) => {
   const query = useQuery({
-    queryKey: ["event"],
+    queryKey: ["event", eventId],
     queryFn: async () => {
-      const response = await client.api.events[":eventId"].details.$get({
+      const response = await client.api.events[":eventId"]["details"].$get({
         param: {
           eventId,
         },
