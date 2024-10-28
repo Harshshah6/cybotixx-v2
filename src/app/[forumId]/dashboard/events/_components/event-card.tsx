@@ -23,7 +23,7 @@ const EventCard = ({ eventName, imageUrl, date, eventId }: EventCardProps) => {
 
   return (
     <div
-      onClick={() => router.push(`/${forumId}/dashboard/events/${eventId}`)}
+      onClick={() => router.push(`/${forumId}/dashboard/events/${eventId}/details`)}
       className=" aspect-square relative group cursor-pointer rounded-xl bg-muted/50 hover:-translate-y-1 transition-all hover:shadow-event hover:shadow-blue-500 hover:-translate-x-1 overflow-hidden"
     >
       <span>

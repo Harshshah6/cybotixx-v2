@@ -77,7 +77,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       {
         title: "Events",
         url: eventId
-          ? `/${forumId}/dashboard/events/${eventId}`
+          ? `/${forumId}/dashboard/events/${eventId}/details`
           : `/${forumId}/dashboard/events`,
         icon: Calendar,
       },
@@ -114,7 +114,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser />
+        {/* <NavUser /> */}
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

@@ -16,9 +16,13 @@ import { useEventId } from "@/features/events/hooks/use-event-id";
 import { useGetEvent } from "@/features/events/api/use-get-event";
 import { Button } from "@/components/ui/button";
 import { HandIcon } from "lucide-react";
+import Image from "next/image";
+import { useGetParticipants } from "@/features/participants/api/use-get-participants";
+import { format } from "date-fns";
 
 const EventIdPage = () => {
   const eventId = useEventId();
+  const { data: participants } = useGetParticipants({ eventId });
 
   const { data: event, isLoading: eventLoading } = useGetEvent({
     eventId,
@@ -56,19 +60,34 @@ const EventIdPage = () => {
           </Breadcrumb>
         </div>
       </header>
-      <div className="w-full flex justify-between items-center px-5">
-        <p className="lg:text-3xl md:text-2xl sm:text-xl text-md font-semibold">
-          {event.eventName}
-        </p>
-        <Button className="text-md bg-blue-500 dark:text-white font-medium hover:bg-blue-500/80">
-          <HandIcon className="size-5" />
-          <p>Participate now</p>
-        </Button>
-      </div>
       <div className="flex flex-1 flex-col gap-4 p-4 pt-2">
-        <ScrollArea className="min-h-[100vh] overflow-hidden flex-1 flex rounded-xl bg-muted/50 md:min-h-min">
-          <EventDetails about={event?.about} />
-        </ScrollArea>
+        <div className="w-full md:justify-start items-center  md:flex p-3 md:items-center gap-4 bg-muted/50 rounded-lg px-5">
+          <div className="aspect-video relative h-40 md:h-full rounded-lg bg-blue-500 overflow-hidden cursor-pointer hover:opacity-80 transition-all">
+            <Image
+              src={event.imageUrl}
+              alt="event image"
+              fill
+            />
+          </div>
+          <div className="flex flex-col space-y-2 truncate">
+            <div>
+              <p className="text-3xl font-semibold">{event?.eventName}</p>
+              <p className="text-sm font-medium text-muted-foreground">
+                Slogan of the event
+              </p>
+            </div>
+            <p className="text-sm font-medium w-[fit-content] bg-white/20 font-mono tracking-tighter rounded-sm text-start px-1">
+              Participants +{participants?.total}
+            </p>
+            <p className="text-sm truncate border px-1 h-6 w-[fit-content] flex justify-center font-mono tracking-tighter items-center bg-white/20 rounded-md">
+              {format(event?.eventDate, "MMMM - dd - yyyy")}
+            </p>
+            <p className="text-sm truncate px-1 h-6 flex justify-center items-center font-mono tracking-tighter w-[fit-content] bg-white/20 rounded-md">
+              {format(event?.eventDate, "hh:mm a")}
+            </p>
+          </div>
+        </div>
+        <EventDetails about={event?.about} />
       </div>
     </SidebarInset>
   );

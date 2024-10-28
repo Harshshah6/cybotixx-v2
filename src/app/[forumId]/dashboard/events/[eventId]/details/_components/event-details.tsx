@@ -2,18 +2,69 @@
 import { Button } from "@/components/ui/button";
 import { HandIcon } from "lucide-react";
 import React from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import EventOverView from "./event-overview";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import EventRules from "./event-rules";
+import EventParticipants from "./event-participants";
+import EventWinners from "./event-winners";
+import { useGetEvent } from "@/features/events/api/use-get-event";
+import { useEventId } from "@/features/events/hooks/use-event-id";
 
-interface Event {
-  about: string;
-}
 
-const EventDetails = ({ about }: Event) => {
+const EventDetails = () => {
+
+
+
+
+  const eventDetailTabs = [
+    {
+      name: "Overview",
+    },
+    {
+      name: "Rules",
+    },
+    {
+      name: "Participants",
+    },
+    {
+      name: "Winners",
+    },
+  ];
+
+  const eventId = useEventId()
+
+  const {data: event} = useGetEvent({eventId})
+
+  console.log(event)
+
+
+
+
+
   return (
-    <div className="border w-full h-full flex flex-col border-green-500">
-      <div className="border flex justify-between px-5 items-center border-yellow-500 h-20">
-        <p className="text-xl font-semibold">Rules and Regulations</p>
-      </div>
-      <div className="border flex-grow overflow-y-auto text-2xl border-red-500"></div>
+    <div className="rounded-lg h-full flex flex-col p-1">
+      <Tabs defaultValue="Overview" className="rounded-none h-full overflow-hidden">
+        <TabsList className="min-w-full flex bg-transparent p-0 gap-3 rounded-none border-b">
+          {eventDetailTabs.map((tab) => (
+            <TabsTrigger key={tab.name} className="" value={tab.name}>
+              {tab.name}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        <TabsContent className="h-full" value="Overview">
+          <EventOverView overview={event?.eventOverview}   />
+        </TabsContent>
+        <TabsContent className="h-full" value="Rules">
+          <EventRules rules={event?.eventRules} />
+        </TabsContent>
+        <TabsContent value="Participants">
+          <EventParticipants eventId={eventId} />
+        </TabsContent>
+        <TabsContent value="Winners">
+          <EventWinners eventId={eventId} />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

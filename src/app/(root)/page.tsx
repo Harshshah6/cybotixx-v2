@@ -14,9 +14,7 @@ const HomePage = () => {
 
 
   return <div className="min-h-screen flex justify-center items-center">
-    <SignedIn>
       <Button onClick={() => router.push(`/${forums?.documents[0].$id}/dashboard`)}>Dashboard</Button>
-    </SignedIn>
   </div>;
 };
 

@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
 import { QueryProvider } from "@/components/query-provider";
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,23 +26,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: dark,
-      }}
-    >
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <ThemeProvider attribute="class" defaultTheme="dark">
-            <QueryProvider><NuqsAdapter>
-              {children}
-              </NuqsAdapter>
-              </QueryProvider>
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          <QueryProvider>{children}</QueryProvider>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }
